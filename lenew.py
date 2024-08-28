@@ -11,7 +11,7 @@ import openai
 
 # Initialize OpenAI API Client
 openai.api_key = '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'
-client = OpenAI()
+# client = OpenAI()
 
 import streamlit as st
 import requests
