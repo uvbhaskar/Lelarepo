@@ -40,7 +40,7 @@ def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
 
         # Convert each piece of text data to a Document object
         for text in page_content:
-            doc = Document(text=text, metadata={"url": url, "depth": current_depth})
+            doc = Document(text=text)
             documents.append(doc)
 
         # Find all links on the page to follow
