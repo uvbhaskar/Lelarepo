@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
-    st.write(Document.__init__.__annotations__)
+    # st.write(Document.__init__.__annotations__)
     if visited is None:
         visited = set()  # Initialize the set of visited URLs
 
@@ -61,8 +61,8 @@ prefix = "https://www.fire.ca.gov/"
 # Scrape data up to a depth of 6
 documents = scrape_data(base_url, prefix, max_depth=6)
 
-st.write("Scraped Data:")
-st.write(documents)
+# st.write("Scraped Data:")
+# st.write(documents)
 
 def response_generator(query):
     try:
