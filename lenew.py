@@ -22,3 +22,5 @@ def scrape_data():
     documents = [p.get_text() for p in soup.find_all('p')]
 
     return documents
+documents = scrape_data()
+print(documents)
