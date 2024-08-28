@@ -30,8 +30,12 @@ def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
     visited.add(url)
     documents = []
 
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an exception for HTTP errors
         soup = BeautifulSoup(response.content, "html.parser")
 
