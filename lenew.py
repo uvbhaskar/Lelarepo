@@ -23,4 +23,4 @@ def scrape_data():
 
     return documents
 documents = scrape_data()
-print(documents)
+st.write(documents)
