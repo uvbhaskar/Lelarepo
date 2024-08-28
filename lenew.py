@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from llama_index.core import VectorStoreIndex
 from llama_index.readers.web import WholeSiteReader
-from llama_index.schema import Document  # Ensure this import is correct
+from llama_index.core import Document  # Ensure this import is correct
 
 # Initialize OpenAI API Client
 client = OpenAI(api_key=st.secrets["open_ai_key"])
