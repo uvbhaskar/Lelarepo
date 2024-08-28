@@ -66,6 +66,7 @@ prefix = "https://www.fire.ca.gov/"
 
 # Scrape data up to a depth of 6
 documents = scrape_data(base_url, prefix, max_depth=6)
+index = VectorStoreIndex.from_documents(documents)
 
 # st.write("Scraped Data:")
 # st.write(documents)
@@ -73,7 +74,6 @@ documents = scrape_data(base_url, prefix, max_depth=6)
 def response_generator(query):
     try:
         # Create an index from the documents
-        index = VectorStoreIndex.from_documents(documents)
         query_engine = index.as_query_engine()
         response = query_engine.query(query)
 
