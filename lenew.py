@@ -30,6 +30,7 @@ def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
         return []  # Avoid revisiting the same URL
 
     visited.add(url)
+    sk.write(url)
     documents = []
 
     headers = {
