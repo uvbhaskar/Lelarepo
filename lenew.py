@@ -10,7 +10,7 @@ from llama_index.core import Document
 import openai
 
 # Initialize OpenAI API Client
-openai.api_key = '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'
+openai.api_key = 
 # client = OpenAI()
 
 import streamlit as st
