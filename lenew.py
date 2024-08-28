@@ -7,7 +7,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from llama_index.core import VectorStoreIndex
 from llama_index.readers.web import WholeSiteReader
 from llama_index.schema import Document  # Ensure this import is correct
-st.write((Document.__init__.__annotations__)
 
 # Initialize OpenAI API Client
 client = OpenAI(api_key=st.secrets["open_ai_key"])
@@ -18,6 +17,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
+    st.write(Document.__init__.__annotations__)
     if visited is None:
         visited = set()  # Initialize the set of visited URLs
 
