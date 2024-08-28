@@ -26,7 +26,7 @@ def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
         return []  # Avoid revisiting the same URL
 
     visited.add(url)
-    st.write(url)
+    # st.write(url)
     documents = []
 
     try:
@@ -58,5 +58,48 @@ prefix = "https://www.fire.ca.gov/"
 # Scrape data up to a depth of 6
 documents = scrape_data(base_url, prefix, max_depth=6)
 
-st.write("Scraped Data:")
-st.write(documents)
+# st.write("Scraped Data:")
+# st.write(documents)
+
+def response_generator(query):
+    try:
+        # Create an index from the documents
+        index = VectorStoreIndex.from_documents(documents)
+        query_engine = index.as_query_engine()
+        response = query_engine.query(query)
+
+    except Exception as e:
+        # Log or handle the exception
+        response = f"An error occurred: {e}"
+
+    return response
+
+st.title("FireBot chat")
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Accept user input
+if prompt := st.chat_input("What is up?"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
+    # Generate and display assistant response
+    response = response_generator(prompt)
+  
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(response)
+    
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
