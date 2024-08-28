@@ -26,23 +26,24 @@ def scrape_data(url, prefix, max_depth=6, current_depth=0, visited=None):
         return []  # Avoid revisiting the same URL
 
     visited.add(url)
-    # st.write(url)
     documents = []
 
     try:
         response = requests.get(url)
+        response.raise_for_status()  # Raise an exception for HTTP errors
         soup = BeautifulSoup(response.content, "html.parser")
 
         # Extract text data from all paragraphs
-        page_content = [p.get_text() for p in soup.find_all('p')]
-        documents.extend(page_content)
+        page_content = [p.get_text().strip() for p in soup.find_all('p') if p.get_text().strip()]
+
+        # Convert each piece of text data to a Document object
+        for text in page_content:
+            doc = Document(text=text, metadata={"url": url, "depth": current_depth})
+            documents.append(doc)
 
         # Find all links on the page to follow
         for link in soup.find_all('a', href=True):
-            # Construct full URL
             full_url = urljoin(url, link['href'])
-
-            # Only follow links that start with the prefix to stay within the domain
             if full_url.startswith(prefix):
                 documents.extend(scrape_data(full_url, prefix, max_depth, current_depth + 1, visited))
 
@@ -58,8 +59,8 @@ prefix = "https://www.fire.ca.gov/"
 # Scrape data up to a depth of 6
 documents = scrape_data(base_url, prefix, max_depth=6)
 
-# st.write("Scraped Data:")
-# st.write(documents)
+st.write("Scraped Data:")
+st.write(documents)
 
 def response_generator(query):
     try:
