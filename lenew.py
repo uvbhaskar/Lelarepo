@@ -9,7 +9,7 @@ from llama_index.readers.web import WholeSiteReader
 from llama_index.core import Document
 
 # Initialize OpenAI API Client
-client = OpenAI(api_key=st.secrets["open_ai_key"])
+client = OpenAI(api_key='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')
 
 import streamlit as st
 import requests
