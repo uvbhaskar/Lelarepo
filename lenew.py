@@ -104,7 +104,7 @@ if prompt := st.chat_input("What is up?"):
         st.markdown(prompt)
     
     # Generate and display assistant response
-    st.write('Before Response generator')
+    # st.write('Before Response generator')
     response = response_generator(prompt)
   
     # Display assistant response in chat message container
